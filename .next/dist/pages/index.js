@@ -83,12 +83,23 @@ var Index = function (_Component) {
     value: function componentWillMount() {
       /* Create reference to messages in Firebase Database */
       var messagesRef = _firebaseapp2.default.database().ref('messages').orderByKey().limitToLast(100);
+      //console.log("messageREF : ",fireapp.database().ref('messages'))
+      //console.log("message from firebase server REF: ", messagesRef)
       messagesRef.on('child_added', function (snapshot) {
+        //  console.log('snapshot',snapshot)
         /* Update React state when message is added at Firebase Database */
-        var message = { text: snapshot.val(), id: snapshot.key };
-        console.log("message from firebase server: ", message);
+        var message = { text: snapshot.val(), id: snapshot.key, author: snapshot.val().author };
+        console.log("message from", message);
+        // snapshot.forEach(function(childSnapshot) {
+        //   var childKey = childSnapshot.key;
+        //   var childData = childSnapshot.val();
+        //
+        //   console.log("Key",childKey)
+        //   console.log("Data",childData)
+        // });
       });
-      _firebaseapp2.default.database().ref('messages').push("this is a test value 1111 0000");
+
+      _firebaseapp2.default.database().ref('messages').push("this is a test value 1111 0000" + Math.random());
     }
   }, {
     key: 'Shows',
@@ -108,39 +119,39 @@ var Index = function (_Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 42
+          lineNumber: 55
         }
       }, _react2.default.createElement('div', { className: 'wrapper', 'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 56
         }
       }, _react2.default.createElement(_head2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 57
         }
       }, _react2.default.createElement('title', {
         'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 58
         }
       }, 'Index'), _react2.default.createElement('meta', { name: 'viewport', content: 'initial-scale=1.0, width=device-width', 'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 46
+          lineNumber: 59
         }
       })), _react2.default.createElement(_header2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 61
         }
       }), _react2.default.createElement('p', {
         'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 62
         }
       }, 'Index Page!'), _react2.default.createElement(_style2.default, {
         styleId: _style4.default.__scopedHash,

@@ -7,5 +7,5 @@ var config = {
     storageBucket: "test-pwa-6f7a8.appspot.com",
     messagingSenderId: "687128074400"
   };
-var fire = firebase.initializeApp(config, "fireapp")
+var fire = firebase.initializeApp(config, "fireapp"+Math.random())
 export default fire

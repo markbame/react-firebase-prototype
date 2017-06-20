@@ -19,12 +19,25 @@ export default class Index extends Component {
   componentWillMount(){
     /* Create reference to messages in Firebase Database */
     let messagesRef = fireapp.database().ref('messages').orderByKey().limitToLast(100);
+    //console.log("messageREF : ",fireapp.database().ref('messages'))
+    //console.log("message from firebase server REF: ", messagesRef)
     messagesRef.on('child_added', snapshot => {
+    //  console.log('snapshot',snapshot)
       /* Update React state when message is added at Firebase Database */
-      let message = { text: snapshot.val(), id: snapshot.key };
-      console.log("message from firebase server: ",message)
+      let message = { text: snapshot.val(), id: snapshot.key, author: snapshot.val().author };
+        console.log("message from",message)
+        // snapshot.forEach(function(childSnapshot) {
+        //   var childKey = childSnapshot.key;
+        //   var childData = childSnapshot.val();
+        //
+        //   console.log("Key",childKey)
+        //   console.log("Data",childData)
+        // });
+
     })
-    fireapp.database().ref('messages').push( "this is a test value 1111 0000" );
+
+  
+    fireapp.database().ref('messages').push( "this is a test value 1111 0000"+Math.random() );
   }
  Shows(props) {
     // const listShows = props.shows.map((tv) =>
