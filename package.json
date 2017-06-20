@@ -1,0 +1,23 @@
+{
+  "name": "firebase-jwt-prototype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "deploy": "firebase deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "firebase": "^4.1.2",
+    "firebase-token-generator": "^2.0.0",
+    "next": "^3.0.0-beta16",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
