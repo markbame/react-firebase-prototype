@@ -60,9 +60,9 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _firebaseApp = require('../utils/firebase-app');
+var _firebaseapp = require('../utils/firebaseapp');
 
-var _firebaseApp2 = _interopRequireDefault(_firebaseApp);
+var _firebaseapp2 = _interopRequireDefault(_firebaseapp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79,6 +79,18 @@ var Index = function (_Component) {
   }
 
   (0, _createClass3.default)(Index, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      /* Create reference to messages in Firebase Database */
+      var messagesRef = _firebaseapp2.default.database().ref('messages').orderByKey().limitToLast(100);
+      messagesRef.on('child_added', function (snapshot) {
+        /* Update React state when message is added at Firebase Database */
+        var message = { text: snapshot.val(), id: snapshot.key };
+        console.log("message from firebase server: ", message);
+      });
+      _firebaseapp2.default.database().ref('messages').push("this is a test value 1111 0000");
+    }
+  }, {
     key: 'Shows',
     value: function Shows(props) {
       // const listShows = props.shows.map((tv) =>
@@ -96,39 +108,39 @@ var Index = function (_Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 32
+          lineNumber: 42
         }
       }, _react2.default.createElement('div', { className: 'wrapper', 'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 33
+          lineNumber: 43
         }
       }, _react2.default.createElement(_head2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 44
         }
       }, _react2.default.createElement('title', {
         'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 35
+          lineNumber: 45
         }
       }, 'Index'), _react2.default.createElement('meta', { name: 'viewport', content: 'initial-scale=1.0, width=device-width', 'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 36
+          lineNumber: 46
         }
       })), _react2.default.createElement(_header2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 48
         }
       }), _react2.default.createElement('p', {
         'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 49
         }
       }, 'Index Page!'), _react2.default.createElement(_style2.default, {
         styleId: _style4.default.__scopedHash,
@@ -150,7 +162,6 @@ var Index = function (_Component) {
                 data = {};
                 _context.next = 3;
                 return new _promise2.default(function (resolve) {
-
                   resolve();
                 });
 
