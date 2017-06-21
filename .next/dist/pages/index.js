@@ -16,6 +16,10 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -84,15 +88,23 @@ var Index = function (_Component) {
   }, {
     key: 'Shows',
     value: function Shows(props) {
-      //console.log("props",props.message)
-      // const listShows = props.shows.map((tv) =>
-      //   <li key={ tv.show.id }>
-      //     Title: { tv.show.name } | Score: { tv.score }
-      //   </li>
-      // );
-      // return (
-      //   <ul>{ listShows }</ul>
-      // );
+
+      (0, _keys2.default)(props.data).forEach(function (key) {
+        console.log("key", props.data[key]);
+      });
+      var listShows = (0, _keys2.default)(props.data).map(function (key) {
+        return _react2.default.createElement('li', { key: key, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 37
+          }
+        }, 'Message: ', props.data[key]);
+      });
+      return _react2.default.createElement('ul', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 42
+        }
+      }, listShows);
     }
   }, {
     key: 'render',
@@ -100,35 +112,30 @@ var Index = function (_Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 48
         }
       }, _react2.default.createElement('div', { className: 'wrapper', 'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 49
         }
       }, _react2.default.createElement(_head2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 50
         }
       }, _react2.default.createElement('title', {
         'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 50
+          lineNumber: 51
         }
       }, 'Index'), _react2.default.createElement('meta', { name: 'viewport', content: 'initial-scale=1.0, width=device-width', 'data-jsx-ext': _style4.default.__scopedHash,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 52
         }
-      })), _react2.default.createElement(_header2.default, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 53
-        }
-      }), _react2.default.createElement(_style2.default, {
+      })), this.Shows(this.props), _react2.default.createElement(_style2.default, {
         styleId: _style4.default.__scopedHash,
         css: _style4.default.__scoped
       }), _react2.default.createElement(_style2.default, {
@@ -152,10 +159,9 @@ var Index = function (_Component) {
                   var messagesRef = _firebaseapp2.default.database().ref('messages').orderByKey().limitToLast(100);
 
                   messagesRef.on('value', function (snapshot) {
-
-                    data = { message: snapshot.val() };
-                    console.log("message", data.message);
-                    resolve();
+                    data = { message: snapshot.val()
+                      //console.log("message", data.message)
+                    };resolve();
                   });
                   //fireapp.database().ref('messages').push( "this is a test value 1111 0000"+Math.random() );
                 });
